@@ -1,0 +1,47 @@
+set icons
+#set drawbox
+
+#set previewer ctpv
+#set cleaner ctpvclear
+#&ctpv -s $id
+#&ctpvquit $id
+
+set previewer ~/.config/lf/lf_kitty_preview
+set cleaner ~/.config/lf/lf_kitty_clean
+
+map a push %mkdir<space>
+map A push %touch<space>
+map <delete> %trash "$fx"
+
+cmd git_branch ${{
+    git branch | fzf | xargs git checkout
+        pwd_shell=$(pwd)
+	    lf -remote "send $id updir"
+	        lf -remote "send $id cd \"$pwd_shell\""
+}}
+map gb :git_branch
+map gp ${{clear; git pull --rebase || true; echo "press ENTER"; read ENTER}}
+map gs ${{clear; git status; echo "press ENTER"; read ENTER}}
+map gl ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit; echo "press ENTER"; read ENTER}}
+
+cmd zle-cd %printf 'cd %q && zle reset-prompt\n' "$PWD" >&$ZLE_FIFO
+
+cmd zle-insert-relative %{{
+    for f in $fx; do
+        printf 'LBUFFER+="${LBUFFER:+ }${(q)$(realpath %q --relative-to=$PWD)}"\n' "$f" >&$ZLE_FIFO
+    done
+}}
+
+cmd zle-insert-absolute %{{
+    for f in $fx; do
+        printf 'LBUFFER+="${LBUFFER:+ }%q"\n' "$f" >&$ZLE_FIFO
+    done
+}}
+
+cmd zle-init :{{
+    map . zle-cd
+    map a zle-insert-relative
+    map A zle-insert-absolute
+}}
+
+&[[ -n "$ZLE_FIFO" ]] && lf -remote "send $id zle-init"
