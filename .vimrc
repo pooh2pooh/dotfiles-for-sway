@@ -11,7 +11,7 @@ set mouse=a
 set nu
 set cursorline
 "set autoindent
-set tabstop=2
+set tabstop=2 shiftwidth=2 smarttab expandtab
 set noswapfile
 set incsearch
 set title
@@ -53,6 +53,6 @@ filetype plugin indent on    " required
 " " Don't do it when the position is invalid or when inside an event handler
 " " (happens when dropping a file on gvim).
 autocmd BufReadPost *
-												\ if line("'\"") > 0 && line("'\"") <= line("$") |
-												\   exe "normal g`\"" |
-												\ endif
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
+      \ endif
