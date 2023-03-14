@@ -29,12 +29,13 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="fg=#ffffff,bg=#85bb65,bold"
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="fg=#ffffff,bg=#ff0000,bold"
 
 
-alias v="nvim"
+alias v="vim"
 alias l="lsd -lX"
 alias ll="lsd -lah"
 alias bt="bluetuith"
 alias vpnon="wg-quick up wg0-client"
 alias vpnoff="wg-quick down wg0-client"
+alias tb="nc termbin.com 9999"
 
 bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down

@@ -1,28 +1,32 @@
 "return" 2>&- || "exit"
 
 set nocompatible              " be iMproved, required
-filetype off                  " required
-syntax enable
-colorscheme molokai
+filetype plugin on            " required
+filetype indent on
+syntax on
+colorscheme solarized8
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 set mouse=a
 set nu
-set cursorline
-"set autoindent
-set tabstop=2 shiftwidth=2 smarttab expandtab
+set encoding=utf-8
+"set cursorline
+set autoindent
+set tabstop=4 softtabstop=4 shiftwidth=4
 set noswapfile
 set incsearch
 set title
-set background=dark
+set bg=dark
 
-"hi Normal ctermbg=NONE guibg=NONE
-hi CursorLine term=bold cterm=bold ctermbg=16
-hi CursorLineNr term=bold cterm=bold ctermfg=106
+hi Normal ctermbg=NONE
+"hi CursorLine term=bold cterm=bold ctermbg=16
+"hi CursorLineNr term=bold cterm=bold ctermfg=106
 
 let g:file_template_default = {}
 let g:file_template_default['html'] = 'skeleton'
+
+let g:airline_theme='solarized_flood'
 
 noremap <F3> :Autoformat<CR>
 
@@ -56,3 +60,6 @@ autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal g`\"" |
       \ endif
+
+" Add Highlight syntax for systemd services
+autocmd BufNewFile,BufRead *.service* set ft=systemd

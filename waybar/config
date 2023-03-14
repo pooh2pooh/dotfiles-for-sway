@@ -5,8 +5,8 @@
 											// "width": 1280, // Waybar width
 								"spacing": 6, // Gaps between modules (4px)
 															// Choose the order of the modules
-								"modules-left": ["sway/workspaces", "sway/mode", "custom/wttr", "custom/usd", "custom/btc", "custom/updates", "custom/trash", "idle_inhibitor"],
-								"modules-center": ["custom/player", "tray"],
+								"modules-left": ["sway/workspaces", "sway/mode", "custom/wttr", "custom/usd", "custom/btc", "custom/updates", "custom/trash", "idle_inhibitor", "tray"],
+								"modules-center": ["custom/player"],
 								"modules-right": ["pulseaudio", "memory", "cpu", "temperature", "custom/boost", "battery", "custom/vpn", "clock", "custom/notification"],
 								// Modules configuration
 								//"sway/workspaces": {

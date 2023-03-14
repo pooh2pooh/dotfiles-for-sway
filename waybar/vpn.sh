@@ -1,8 +1,14 @@
 #!/bin/bash
 
-vpn=$(ip link | grep wg0-client)
+vpn1=$(ip link | grep wg0-client)
+vpn2=$(ip link | grep wg1)
 
-if [[ ${vpn} > 0 ]];
+if [[ ${vpn1} > 0 ]];
 then
-				echo "廬"
+				echo "󰞀 "
+fi
+
+if [[ ${vpn2} > 0 ]];
+then
+				echo "󰒘 "
 fi

@@ -32,6 +32,60 @@ cmd zle-insert-relative %{{
     done
 }}
 
+cmd share $curl -F"file=@$fx" https://0x0.st | wl-copy
+
+cmd select-files ${{
+    { echo "$fs"; find -L "$(pwd)" -mindepth 1 -maxdepth 1 -type f; } |
+        if [ "$lf_hidden" = "false" ]; then
+          # remove any hidden files so you only select files you can see.
+          grep -v '/\.[^/]\+$'
+        else
+          cat
+        fi |
+        sed '/^$/d' | sort | uniq -u |
+        xargs -d '\n' -r -I{} lf -remote "send $id toggle {}"
+}}
+
+cmd select-dirs ${{
+    { echo "$fs"; find -L "$(pwd)" -mindepth 1 -maxdepth 1 -type d; } |
+        if [ "$lf_hidden" = "false" ]; then
+          grep -v '/\.[^/]\+$'
+        else
+          cat
+        fi |
+        sed '/^$/d' | sort | uniq -u |
+        xargs -d '\n' -r -I{} lf -remote "send $id toggle {}"
+}}
+
+cmd open-with-gui &$@ $fx ## opens with a gui application outside lf client
+cmd open-with-cli $$@ $fx ## opens with a cli application inside lf client
+map O push :open-with-gui<space> ## input application
+map o push :open-with-cli<space> ## input application
+
+cmd yank-dirname $dirname -- "$f" | head -c-1 | wl-copy
+cmd yank-path $printf '%s' "$fx" | wl-copy
+cmd yank-basename $basename -a -- $fx | head -c-1 | wl-copy
+
+cmd yank-basename-without-extension ${{
+    echo "$fx" |
+      xargs -r -d '\n' basename -a |
+      awk -e '{
+        for (i=length($0); i > 0; i--) {
+          if (substr($0, i, 1) == ".") {
+            if (i == 1) print $0
+            else print substr($0, 0, i-1)
+
+            break
+          }
+        }
+
+        if (i == 0)
+          print $0
+      }' |
+      if [ -n "$fs" ]; then cat; else tr -d '\n'; fi |
+      wl-copy
+}}
+
 cmd zle-insert-absolute %{{
     for f in $fx; do
         printf 'LBUFFER+="${LBUFFER:+ }%q"\n' "$f" >&$ZLE_FIFO
