@@ -1,0 +1,17 @@
+input "1267:12553:ELAN2602:00_04F3:3109_Touchpad" {
+  events enabled
+  accel_profile adaptive
+  pointer_accel 0.8
+  natural_scroll enabled
+  scroll_factor 1.0
+  scroll_method two_finger
+  left_handed disabled
+  tap enabled
+  tap_button_map lrm
+  drag enabled
+  drag_lock disabled
+  dwt enabled
+  dwtp enabled
+  middle_emulation enabled
+  click_method button_areas
+}

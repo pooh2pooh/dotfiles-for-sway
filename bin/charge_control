@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -n $1 ]
+then
+				echo '40 70' > /sys/devices/platform/huawei-wmi/charge_control_thresholds
+else
+				echo 'No parameters found. '
+fi

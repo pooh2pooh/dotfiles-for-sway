@@ -1,0 +1,10 @@
+#!/bin/sh
+
+mpv_pid=$(ps -C mpv -o pid=)
+if [[ $mpv_pid ]]; then
+	notify-send 'Выключаю музыку' 'Я просто убил процесс <b>mpv</b>.'
+	kill -9 $mpv_pid
+else
+	notify-send 'Включаю музыку' 'Воспроизвожу музыку по ссылке из буфера обмена.'
+	mpv --no-video $1
+fi

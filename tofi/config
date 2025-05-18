@@ -16,7 +16,7 @@
 	font = "Caskaydia Cove Nerd Font"
 
 	# Point size of text.
-	font-size = 24
+	font-size = 20
 
 	# Comma separated list of OpenType font feature settings to apply,
 	# if supported by the chosen font. The format is similar to the CSS
@@ -42,7 +42,7 @@
 	# specified via `font`. Disabling font hinting speeds up text
 	# rendering appreciably, but will likely look poor at small font pixel
 	# sizes.
-	hint-font = true
+	hint-font = false
 
 #
 ### Text theming
@@ -114,7 +114,7 @@
 ### Text layout
 #
 	# Prompt to display.
-	prompt-text = "run: "
+	prompt-text = " запустить: "
 
 	# Extra horizontal padding between prompt and input.
 	prompt-padding = 0
@@ -143,28 +143,28 @@
 	height = 720
 
 	# Window background color
-	background-color = #1B1D1E
+	background-color = #1B1D1EFC
 
 	# Width of the border outlines in pixels.
-	outline-width = 4
+	outline-width = 0
 
 	# Border outline color
 	outline-color = #080800
 
 	# Width of the border in pixels.
-	border-width = 12
+	border-width = 0
 
 	# Border color
 	border-color = #F92672
 
 	# Radius of window corners in pixels.
-	corner-radius = 0
+	corner-radius = 8
 
 	# Padding between borders and text. Can be pixels or a percentage.
-	padding-top = 8
-	padding-bottom = 8
-	padding-left = 8
-	padding-right = 8
+	padding-top = 1
+	padding-bottom = 1
+	padding-left = 1
+	padding-right = 1
 
 	# Whether to clip text drawing to be within the specified padding. This
 	# is mostly important for allowing text to be inset from the border,

@@ -1,217 +1,274 @@
 {
 				// "layer": "top", // Waybar at top layer
 				// "position": "bottom", // Waybar position (top|bottom|left|right)
-				"height": 28, // Waybar height (to be removed for auto height)
-											// "width": 1280, // Waybar width
-								"spacing": 6, // Gaps between modules (4px)
-															// Choose the order of the modules
-								"modules-left": ["sway/workspaces", "sway/mode", "custom/wttr", "custom/usd", "custom/btc", "custom/updates", "custom/trash", "idle_inhibitor", "tray"],
-								"modules-center": ["custom/player"],
-								"modules-right": ["pulseaudio", "memory", "cpu", "temperature", "custom/boost", "battery", "custom/vpn", "clock", "custom/notification"],
-								// Modules configuration
-								//"sway/workspaces": {
-								//     "disable-scroll": true,
-								//     "all-outputs": true,
-								//     "format": "{name}: {icon}",
-								//     "format-icons": {
-								//         "1": "",
-								//         "2": "",
-								//         "3": "",
-								//         "4": "",
-								//         "5": "",
-								//         "urgent": "",
-								//         "focused": "",
-								//         "default": ""
-								//    }
-								//},
-								"keyboard-state": {
-												"numlock": true,
-												"capslock": true,
-												"format": "{name} {icon}",
-												"format-icons": {
-																"locked": "",
-																"unlocked": ""
-												}
+				// "height": 32, // Waybar height (to be removed for auto height)
+				// "width": 1280, // Waybar width
+				"spacing": 4, // Gaps between modules (4px)
+				// Choose the order of the modules
+				"modules-left": ["sway/workspaces", "sway/mode", "tray", "custom/bluetooth", "pulseaudio", "disk", "custom/memory", "custom/trash", "custom/scratchpad-indicator"],
+				"modules-center": ["custom/wttr", "custom/usd", "custom/btc", "custom/ton"],
+				"modules-right": ["image#runcat", "custom/updates", "custom/boost", "battery", "custom/vpn", "clock", "idle_inhibitor", "custom/notification"],
+				// Modules configuration
+				//"sway/workspaces": {
+				//     "disable-scroll": true,
+				//     "all-outputs": true,
+				//     "format": "{name}: {icon}",
+				//     "format-icons": {
+				//         "1": "",
+				//         "2": "",
+				//         "3": "",
+				//         "4": "",
+				//         "5": "",
+				//         "urgent": "",
+				//         "focused": "",
+				//         "default": ""
+				//    }
+				//},
+				"keyboard-state": {
+								"numlock": true,
+								"capslock": true,
+								"format": "{name} {icon}",
+								"format-icons": {
+												"locked": "",
+												"unlocked": ""
+								}
+				},
+				"sway/window": {
+								"format": "{}"
+				},
+				"sway/mode": {
+								"format": "{}"
+				},
+				"mpd": {
+								"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+								"format-disconnected": "Disconnected ",
+								//"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+								"format-stopped": "",
+								"unknown-tag": "N/A",
+								"interval": 2,
+								"consume-icons": {
+												"on": " "
 								},
-								"sway/window": {
-												"format": "{}"
+								"random-icons": {
+												"off": "<span color=\"#f53c3c\"></span> ",
+												"on": " "
 								},
-								"sway/mode": {
-												"format": "{}"
+								"repeat-icons": {
+												"on": " "
 								},
-								"mpd": {
-												"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-												"format-disconnected": "Disconnected ",
-												//"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-												"format-stopped": "",
-												"unknown-tag": "N/A",
-												"interval": 2,
-												"consume-icons": {
-																"on": " "
-												},
-												"random-icons": {
-																"off": "<span color=\"#f53c3c\"></span> ",
-																"on": " "
-												},
-												"repeat-icons": {
-																"on": " "
-												},
-												"single-icons": {
-																"on": "1 "
-												},
-												"state-icons": {
-																"paused": "",
-																"playing": ""
-												},
-												"tooltip-format": "MPD (connected)",
-												"tooltip-format-disconnected": "MPD (disconnected)"
+								"single-icons": {
+												"on": "1 "
 								},
-								"idle_inhibitor": {
-												"format": "{icon}",
-												"format-icons": {
-																"activated": "",
-																"deactivated": ""
-												}
+								"state-icons": {
+												"paused": "",
+												"playing": ""
 								},
-								"tray": {
-												"icon-size": 22,
-												"spacing": 8
+								"tooltip-format": "MPD (connected)",
+								"tooltip-format-disconnected": "MPD (disconnected)"
+				},
+				"idle_inhibitor": {
+								"format": "{icon}",
+								"format-icons": {
+												"activated": "󰅶",
+												"deactivated": "󰾪"
+								}
+				},
+				"tray": {
+								"icon-size": 22,
+								"spacing": 8
+				},
+				"clock": {
+								"timezone": "Europe/Moscow",
+								"tooltip-format": "<tt><small>{calendar}</small></tt>",
+								"format-alt": "   {:%a, %d. %b  %H:%M}",
+                "format": "{:%a, %H:%M}",
+				},
+				"cpu": {
+								"format": "{usage}% CPU",
+								"tooltip": true,
+								"interval": 1
+				},
+				"memory": {
+								"format": "{}% RAM"
+				},
+				"temperature": {
+								// "thermal-zone": 2,
+								"hwmon-path": "/sys/devices/pci0000:00/0000:00:08.1/0000:03:00.0/hwmon/hwmon2/temp1_input", // здесь на стоковом ядре hwmon2 вместо hwmon0
+								"critical-threshold": 69,
+								"format-critical": "<span color=\"red\">{temperatureC}°C {icon}</span>",
+								"format": "{temperatureC}°C {icon}",
+								"format-icons": ["", "", ""],
+								"tooltip": false
+				},
+				"backlight": {
+								// "device": "acpi_video1",
+								"format": "{percent}% {icon}",
+								"format-icons": ["", ""]
+				},
+				"battery": {
+								"states": {
+												// "good": 95,
+												"warning": 30,
+												"critical": 15
 								},
-								"clock": {
-												// "timezone": "America/New_York",
-												"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-												"format-alt": "{:%a, %d. %b  %H:%M}"
-								},
-								"cpu": {
-												"format": "{usage}% CPU",
-												"tooltip": true,
-												"interval": 1
-								},
-								"memory": {
-												"format": "{}% RAM"
-								},
-								"temperature": {
-												// "thermal-zone": 2,
-												"hwmon-path": "/sys/devices/pci0000:00/0000:00:08.1/0000:03:00.0/hwmon/hwmon3/temp1_input",
-												"critical-threshold": 69,
-												"format-critical": "<span color=\"red\">{temperatureC}°C {icon}</span>",
-												"format": "{temperatureC}°C {icon}",
-												"format-icons": ["", "", ""]
-								},
-								"backlight": {
-												// "device": "acpi_video1",
-												"format": "{percent}% {icon}",
-												"format-icons": ["", ""]
-								},
-								"battery": {
-												"states": {
-																// "good": 95,
-																"warning": 30,
-																"critical": 15
-												},
-												"format": "{capacity}% {icon}",
-												"format-charging": "{capacity}% charging",
-												"format-plugged": "",
+								"format": "{capacity}% {icon}",
+								"format-charging": "{capacity}% <span color='green'>󰂄</span>",
+								"format-plugged": "",
 
-												"format-alt": "{time} {icon}",
-												// "format-good": "", // An empty format will hide the module
-												"format-warning": "<span color=\"orange\">{time} {icon}</span>",
-												// "format-full": "",
-												"format-icons": ["", "", "", "", ""]
+								"format-alt": "{time} {icon}",
+								// "format-good": "", // An empty format will hide the module
+								"format-warning": "<span color=\"orange\">{time} {icon}</span>",
+								// "format-full": "",
+								"format-icons": ["", "", "", "", ""]
+				},
+				"network": {
+								// "interface": "wlp2*", // (Optional) To force the use of this interface
+								"format-wifi": "{essid} ({signalStrength}%) ",
+								"format-ethernet": "{ipaddr}/{cidr} ",
+								"tooltip-format": "{ifname} via {gwaddr} ",
+								"format-linked": "{ifname} (No IP) ",
+								"format-disconnected": "Disconnected ⚠",
+								"format-alt": "{ifname}: {ipaddr}/{cidr}"
+				},
+        "disk": {
+                "interval": 120,
+                "format": "<span font='11'>{used}</span>",
+        },
+				"pulseaudio": {
+								"tooltip": true,
+								// "scroll-step": 1, // %, can be a float
+								"tooltip-format": " {volume}%",
+								// "format": "{volume}% {icon} {format_source}",
+								"format": "{icon} {format_source}",
+								// "format-bluetooth": "{volume}% {icon} {format_source}",
+								"format-bluetooth": "<span color='lightblue'>{icon}</span> {format_source}",
+								"format-bluetooth-muted": "<span color='gray'>{icon}</span> {format_source}",
+								"format-muted": "󰝟  {format_source}",
+								// "format-source": " {volume}% ",
+								"format-source": " <span color='darkred'></span>",
+								"format-source-muted": "  ",
+								"format-icons": {
+												"headphone": "",
+												"hands-free": "",
+												"headset": "<span font='16' rise='-3500'>󰥰</span>",
+												"phone": "",
+												"portable": "",
+												"car": "",
+												"default": ["", "", "", ""]
 								},
-								"network": {
-												// "interface": "wlp2*", // (Optional) To force the use of this interface
-												"format-wifi": "{essid} ({signalStrength}%) ",
-												"format-ethernet": "{ipaddr}/{cidr} ",
-												"tooltip-format": "{ifname} via {gwaddr} ",
-												"format-linked": "{ifname} (No IP) ",
-												"format-disconnected": "Disconnected ⚠",
-												"format-alt": "{ifname}: {ipaddr}/{cidr}"
-								},
-								"pulseaudio": {
-												// "scroll-step": 1, // %, can be a float
-												"format": "{volume}% {icon} {format_source}",
-												"format-bluetooth": "{volume}% {icon} {format_source}",
-												"format-bluetooth-muted": "  {icon} {format_source}",
-												"format-muted": "  {format_source}",
-												"format-source": " {volume}% ",
-												"format-source-muted": "  ",
-												"format-icons": {
-																"headphone": "",
-																"hands-free": "",
-																"headset": "",
-																"phone": "",
-																"portable": "",
-																"car": "",
-																"default": ["", "", ""]
-												},
-												"on-click": "pavucontrol"
-								},
-								"custom/usd": {
-												"format": " {}",
-												"exec": "/home/pooh/.config/waybar/usdprice.sh",
-												"interval": 3600
-								},
-								"custom/btc": {
-												"format": " {}",
-												"exec": "/home/pooh/.config/waybar/btcprice.sh",
-												"interval": 3600
-								},
-								"custom/weather": {
-												"format": "{}",
-												"exec": "/home/pooh/.config/waybar/weather.sh",
-												"interval": 3600
-								},
-								"custom/wttr": {
-												"format": "{}",
-												"tooltip": true,
-												"interval": 1800,
-												"exec": "/home/pooh/.config/waybar/wttr.py",
-												"return-type": "json"
-								},
-								"custom/updates": {
-												"format": "{}",
-												"exec": "/home/pooh/.config/waybar/arch_updates.sh",
-												"interval": 3600
-								},
-								"custom/boost": {
-												"format": "{}",
-												"exec": "/home/pooh/.config/waybar/boost.sh",
-												"interval": 1
-								},
-								"custom/trash": {
-												"format": "{}",
-												"exec": "/home/pooh/.config/waybar/trash.sh",
-												"interval": 1
-								},
-								"custom/player": {
-												"format": "{}",
-												"exec": "/home/pooh/.config/waybar/player.sh",
-												"interval": 1,
-												"on-click": "playerctl play-pause",
-												"on-click-right": "playerctl next"
-								},
-								"custom/vpn": {
-												"format": "{}",
-												"exec": "/home/pooh/.config/waybar/vpn.sh",
-												"interval": 10
-								},
-								"custom/notification": {
-												"tooltip": false,
-												"format": "{icon}",
-												"format-icons": {
-																"notification": "<span foreground='red'><sup></sup></span>",
-																"none": "",
-																"dnd-notification": "<span foreground='red'><sup></sup></span>",
-																"dnd-none": ""
-												},
-												"return-type": "json",
-												"exec-if": "which swaync-client",
-												"exec": "swaync-client -swb",
-												"on-click": "swaync-client -t -sw",
-												"on-click-right": "swaync-client -d -sw",
-												"escape": true
-								},
+								"on-click": "pavucontrol"
+				},
+				"wireplumber": {
+								"format": "{volume}% {icon}",
+								"format-muted": " ",
+								"on-click": "pavucontrol",
+								"format-icons": ["", "", ""]
+				},
+        "custom/bluetooth": {
+								"format": "{}",
+								"exec": "/home/pooh/.config/waybar/bluetooth.sh",
+								"interval": 1,
+								"tooltip": false,
+                "on-click": "kitty --class 'floating_terminal' sh -c 'bluetuith'",
+                "on-click-right": "bt_toggle",
 
+				},
+        "custom/internet": {
+                "exec": "/home/pooh/.config/waybar/internet.sh",
+                "interval": 1,
+                "format": "{}",
+                "on-click": "kitty --class 'floating_terminal' sh -c 'nmtui'"
+        },
+				"custom/usd": {
+								"format": " {}",
+								"exec": "/home/pooh/.config/waybar/usdprice.sh",
+								"interval": 60,
+								"tooltip": false
+				},
+				"custom/btc": {
+								"exec": "/home/pooh/.config/waybar/btc_monitor.sh",
+								"interval": 30,
+                "return-type": "json"
+				},
+        "custom/ton": {
+								"exec": "/home/pooh/.config/waybar/ton_monitor.sh",
+								"interval": 30,
+                "return-type": "json"
+				},
+				"custom/wttr": {
+								"format": "   {}",
+								"tooltip": true,
+								"interval": 1800,
+								"exec": "/home/pooh/.config/waybar/wttr.py",
+								"return-type": "json"
+				},
+				"custom/updates": {
+								"format": "{}",
+								"exec": "/home/pooh/.config/waybar/arch_updates.sh",
+								"interval": 3600
+				},
+				"custom/boost": {
+                "return-type": "json",
+								"format": "{}",
+								"exec": "/home/pooh/.config/waybar/boost.sh",
+								"interval": 1,
+								"tooltip": true
+				},
+				"custom/trash": {
+								"format": "{}",
+								"exec": "/home/pooh/.config/waybar/trash.sh",
+								"interval": 1
+				},
+				"custom/player": {
+								"format": "{}",
+								"exec": "/home/pooh/.config/waybar/player.sh",
+								"interval": 1,
+								"on-click": "playerctl play-pause",
+								"on-click-right": "playerctl next"
+				},
+				"custom/vpn": {
+								"format": "{}",
+								"exec": "/home/pooh/.config/waybar/vpn.sh",
+								"interval": 10
+				},
+				"custom/notification": {
+								"tooltip": false,
+								"format": "  {icon}",
+								"format-icons": {
+												"notification": "<span foreground='red'><sup></sup></span>",
+												"none": "",
+												"dnd-notification": "<span foreground='red'><sup></sup></span>",
+												"dnd-none": ""
+								},
+								"return-type": "json",
+								"exec-if": "which swaync-client",
+								"exec": "swaync-client -swb",
+								"on-click": "swaync-client -t -sw",
+								"on-click-right": "swaync-client -d -sw",
+								"escape": true
+				},
+				"custom/scratchpad-indicator": {
+								"interval": 3,
+								"return-type": "json",
+								"exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'",
+								"format": "󱂬<span foreground='orange'><sup></sup></span>  {}",
+								"on-click": "exec swaymsg 'scratchpad show'",
+								"on-click-right": "exec swaymsg 'move scratchpad'"
+				},
+				"custom/memory": {
+					"exec": "/home/pooh/dotfiles/waybar/mem.sh",
+					"interval": 1,
+					"tooltip": false,
+				},
+				"custom/cpu": {
+					"exec": "/home/pooh/dotfiles/waybar/cpu.sh",
+					"interval": 1,
+					"tooltip": false,
+				},
+        "image#runcat": {
+          "exec": "/home/pooh/dotfiles/waybar/runcat.sh",
+          "size": 32,
+          "interval": 1 
+        }
 }
 

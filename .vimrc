@@ -1,21 +1,65 @@
 "return" 2>&- || "exit"
 
 set nocompatible              " be iMproved, required
-filetype plugin on            " required
-filetype indent on
 syntax on
 colorscheme solarized8
+
+" Enable filetype detection, and load filetype-specific plugins and
+" indentation.
+filetype plugin indent on
+
+" Enable visual autocomplete of commands.
+set wildmenu
+
+" Enable the ruler that shows the cursor position.
+set ruler
+
+" Automatically reload files if they changed outside of Vim, do not ask.
+set autoread
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 set mouse=a
 set nu
+
+" Use UTF-8 as encoding.
 set encoding=utf-8
-"set cursorline
+set fileencoding=utf-8
+
+" set cursorline
+
+" Indent by two spaces please.
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set smarttab
+
+" Enable auto-indent (copies the indent of the current line when starting a
+" new line). Do *not* enable smart indent, it breaks stuff for many languages
+" (including comments in Python), and the filetype specific plugins should
+" have a better indentation scheme anyway.
 set autoindent
-set tabstop=4 softtabstop=4 shiftwidth=4
+set nosmartindent
+
+" Do not insert a line break when I type past the text width.
+set formatoptions-=t
+
+" Highlight the column after the text width.
+set colorcolumn=+1
+
+" Default to 80 columns. Can be overridden by the file type later.
+set textwidth=80
+
 set noswapfile
+
+" Highlight search results, do incremental search.
+" set hlsearch -- or not, looks ugly
 set incsearch
+
+" Highlight matching brackets for 0.2 seconds.
+set showmatch
+set matchtime=2
+
 set title
 set bg=dark
 
@@ -38,6 +82,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-autoformat/vim-autoformat'
 Plugin 'tribela/vim-transparent'
+Plugin 'dense-analysis/ale'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -57,9 +102,9 @@ filetype plugin indent on    " required
 " " Don't do it when the position is invalid or when inside an event handler
 " " (happens when dropping a file on gvim).
 autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal g`\"" |
-      \ endif
+			\ if line("'\"") > 0 && line("'\"") <= line("$") |
+			\   exe "normal g`\"" |
+			\ endif
 
 " Add Highlight syntax for systemd services
 autocmd BufNewFile,BufRead *.service* set ft=systemd

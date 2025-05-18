@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Проверяем состояние Bluetooth
+bluetooth_status=$(bluetoothctl show | grep "Powered: yes")
+#bluetooth_status=$(systemctl status bluetooth.service | grep "Active: active (running)")
+
+# Проверяем, является ли Bluetooth включенным
+if [[ -n $bluetooth_status ]]; then
+    # Bluetooth включен
+    bluetoothctl power off
+    #systemctl stop bluetooth.service
+else
+    # Bluetooth выключен
+    bluetoothctl power on
+    #systemctl start bluetooth.service
+fi
+

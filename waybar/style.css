@@ -1,27 +1,16 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Caskaydia Cove Nerd Font;
-    font-size: 16px;
-    font-weight: normal;
+    font-family: Caskaydia NFM;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 window#waybar {
-    /*background-color: rgba(0, 43, 54, 1);*/
-    /*background: linear-gradient(180deg, rgba(94, 39, 80, 0.75) 0%, rgba(44, 0, 30, 0.75) 85%);*/
-    /*background: linear-gradient(180deg, rgba(71, 71, 71, 1) 0%, rgba(36, 34, 30, 1) 100%);*/
-    background: transparent;
-		/*border-top: 2px solid rgba(81, 81, 81, 1);*/
-    /*border-bottom: 2px solid rgba(26, 24, 20, 1);*/
-    color: #dfdfdf;
+    background-color: #020202;
+    color: #BAC2DE;
     transition-property: background-color;
-    transition-duration: .5s;
-}
-window#waybar > box {
-    border-radius: 8px;
-    margin: 4px 8px 8px 8px;
-    /*background-color: rgba(32, 32, 32, 0.75);*/
-    background: linear-gradient(180deg, rgba(71, 71, 71, 1) 0%, rgba(36, 34, 30, .7) 100%);
-    box-shadow: 4px 4px 2px 1px #101010;
+    transition-duration: .15s;
+    /*border-bottom: 1px solid grey;*/
 }
 
 window#waybar.hidden {
@@ -42,14 +31,14 @@ window#waybar.termite {
 }
 
 window#waybar.chromium {
-    background-color: #000000;
+    background-color: #020202;
     border: none;
 }
 
 #workspaces button {
     padding: 2px;
     background-color: transparent;
-    color: #ffffff;
+	  color: #333;
     /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
     /* Avoid rounded borders under each workspace name */
@@ -61,19 +50,22 @@ window#waybar.chromium {
 #workspaces button:hover {
     padding: 2px;
     background: rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 -3px #ffffff;
+    /*box-shadow: inset 0 -3px #ffffff;*/
+    box-shadow: inset 0 3px pink;
 }
 
 #workspaces button.focused {
     padding: 2px;
-    /*background-color: #64727D;*/
-    background-color: rgba(0, 0, 0, 0.2);
+    /*background-color: #d33682;*/
+	  color: #d33682;
+    /*background-color: rgba(0, 0, 0, 0.2);*/
     /*box-shadow: inset 0 -3px #ffffff;*/
 }
 
 #workspaces button.urgent {
     padding: 2px;
-    background-color: #eb4d4b;
+    /*background-color: #eb4d4b;*/
+	  color: orange;
 }
 
 #mode {
@@ -83,6 +75,9 @@ window#waybar.chromium {
     /*border-bottom: 3px solid #ffffff;*/
 }
 
+#clock {
+  font-weight: normal;
+}
 #clock,
 #battery,
 #disk,
@@ -94,76 +89,102 @@ window#waybar.chromium {
 #mode,
 #idle_inhibitor,
 #mpd {
-    padding: 0 10px;
+  padding: 0 10px;
 }
+
+#tray {
+  padding-left: 28px;
+}
+
+
+
 #pulseaudio,
 #battery {
-    padding: 0 12px;
+  padding: 0 12px;
+}
+#network {
+	padding: 0 12px;
+	font-size: 0.8em;
+	color: #966;
 }
 #custom-boost {
-    padding: 0 5px;
-		color: #FFFFE0;
+  padding: 0 5px;
+}
+#custom-memory {
+  padding: 0 5px;
 }
 #custom-notification {
-    margin: 0 30px;
+  margin: 0 30px;
 }
 #custom-usd,
-#custom-btc {
-    padding: 0 5px;
+#custom-btc,
+#custom-ton {
+  padding: 0 5px;
 }
 #custom-weather,
 #custom-wttr,
 #custom-usd,
 #custom-btc,
+#custom-ton,
 #custom-updates,
 #custom-trash {
-    padding: 0 12px;
-		color: #FFFFFF;
-		font-size: 0.8em;
+  padding: 0 10px;
+	font-size: 0.9em;
+  font-weight: normal;
+}
+#custom-usd {
+	color: #859900;
+}
+#custom-btc {
+	color: #b58900;
+}
+#custom-ton {
+  color: #229ed9;
 }
 #custom-player {
-    padding: 0 50px;
-		color: #fff;
-		font-size: 0.8em;
-    font-weight: bold;
+  padding: 0 50px;
+	font-size: 0.8em;
+  font-weight: bold;
 }
 #custom-weather {
-    font-family: Weather Icons;
-		color: #FFFFE0;
+  font-family: Weather Icons;
 }
 #custom-vpn {
-		padding: 0 8px;
-    color: #FFFFE0;
+	padding: 0 5px;
+  margin: 4px 10px 4px 20px;
+  font-size: 0.7em;
+  font-weight: normal;
+  border: 2px solid grey;
+  border-radius: 5;
 }
 
 #cpu,
 #memory,
 #temperature {
-    padding: 0 7px;
-    color: #FFFFFF;
-		font-size: 0.8em;
+  padding: 0 7px;
+	font-size: 0.9em;
+	color: #6c71c4;
 }
 
 #window,
 #workspaces {
-    margin: 0 4px;
+  margin: 0 4px;
 }
 #window {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 #battery {
-    color: #ffffff;
 }
 
 #battery.charging, #battery.plugged { 
@@ -172,21 +193,21 @@ window#waybar.chromium {
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        background-color: #BAC2DE;
+        color: #020202;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: #f53c3c;
+  color: #BAC2DE;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 label:focus {
-    background-color: #000000;
+  background-color: #020202;
 }

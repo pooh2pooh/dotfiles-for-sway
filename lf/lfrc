@@ -33,6 +33,7 @@ cmd zle-insert-relative %{{
 }}
 
 cmd share $curl -F"file=@$fx" https://0x0.st | wl-copy
+cmd copy-image $cat $fx | wl-copy
 
 cmd select-files ${{
     { echo "$fs"; find -L "$(pwd)" -mindepth 1 -maxdepth 1 -type f; } |
